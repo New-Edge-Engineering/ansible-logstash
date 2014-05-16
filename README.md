@@ -1,4 +1,4 @@
-# Ansible Ansible Role #
+# Ansible logstash Role #
 
 Ansible role to install and configure logstash 1.4. Feedback, bug-reports, 
 requests, is welcomed and can be done via
