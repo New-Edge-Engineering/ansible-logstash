@@ -11,7 +11,4 @@ galaxy_info:
     - precise
   categories:
   - system
-  - management
-
-dependencies:
-  - neel.openjdk7
+  - monitor
