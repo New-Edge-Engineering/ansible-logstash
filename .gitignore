@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 # Eclipse IDE generated files and folders
 .project
+=======
+files/logstash-forwarder*
+>>>>>>> origin/master
