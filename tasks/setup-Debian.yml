@@ -27,3 +27,17 @@
     groups: adm
   when: ansible_os_family == "Debian"
   notify: restart logstash
+
+- name: Stop Logstash Web
+  service:
+    name: logstash-web
+    state: stopped
+    enabled: no
+
+- name: Disable Logstash Web
+  copy:
+    dest: /etc/init/logstash-web.override
+    content: "manual\n"
+    owner: root
+    group: root
+    mode: 644
