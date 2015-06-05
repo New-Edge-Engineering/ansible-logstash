@@ -13,7 +13,7 @@
     group: root
     mode: 0644
   with_items:
-    - 3-rsyslog-input.conf
+    - 03-rsyslog-input.conf
   notify: restart logstash
 
 - name: Create Logstash configuration files.
