@@ -1,4 +1,6 @@
 ---
+logstash_download_path: "{{ temp_dir|mandatory }}"
+
 logstash_listen_port_lumberjack: 5000
 
 logstash_elasticsearch_host: localhost

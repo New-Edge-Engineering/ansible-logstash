@@ -1,6 +1,8 @@
 output {
   elasticsearch {
-    host => {{ logstash_elasticsearch_host }}
-    embedded => false
+    cluster => "logstash"
+    host => "{{ logstash_elasticsearch_host }}"
+    node_name => "logstash"
+    protocol => "http"
   }
 }
