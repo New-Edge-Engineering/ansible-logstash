@@ -45,6 +45,7 @@
     - 14-solr.conf
     - 15-drupal.conf
     - 16-django.conf
+    - 17-log4j.conf
   notify: restart logstash
 
 - name: Create Logstash configuration file for local syslog.
