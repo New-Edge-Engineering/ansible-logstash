@@ -1,7 +1,7 @@
 output {
 {% if 'logstash-output-amazon_es' in logstash_plugins %}
   amazon_es {
-    host => "__HOST__"
+    hosts => [ "__HOST__" ]
     region => "__REGION__"
     index => "logstash-%{+YYYY.MM.dd}"
   }
