@@ -3,43 +3,51 @@
   apt_key:
     url: http://packages.elasticsearch.org/GPG-KEY-elasticsearch
     state: present
-  when: logstash_version | version_compare('1.4', operator='eq', strict=True)
 
 - name: Add Logstash repository.
   apt_repository:
-    repo: 'deb http://packages.elasticsearch.org/logstash/1.4/debian stable main'
+    repo: "deb http://packages.elasticsearch.org/logstash/{{ logstash_version }}/debian stable main"
     state: present
-  when: logstash_version | version_compare('1.4', operator='eq', strict=True)
 
 - name: Check if Logstash is already installed.
-  stat: path=/etc/init.d/logstash
+  stat:
+    path: /etc/init.d/logstash
   register: logstash_installed
 
 - name: Update apt cache if repository just added.
-  apt: update_cache=yes
+  apt:
+    update_cache: yes
   when: logstash_installed.stat.exists == false
 
 - name: Install Logstash.
-  apt: pkg=logstash state=present
+  apt:
+    pkg: logstash
+    state: present
 
 - name: Add Logstash user to adm group (Debian).
   user:
     name: logstash
     group: logstash
     groups: adm
-  when: ansible_os_family == "Debian"
   notify: restart logstash
 
-- name: Stop Logstash Web
+- name: Check if Logstash Web is installed.
+  stat:
+    path: /etc/init.d/logstash-web
+  register: logstash_web_installed
+
+- name: Ensure Logstash Web is stoped
   service:
     name: logstash-web
     state: stopped
     enabled: no
+  when: logstash_web_installed.stat.exists == true
 
-- name: Disable Logstash Web
+- name: Ensure Logstash Web is disable
   copy:
     dest: /etc/init/logstash-web.override
     content: "manual\n"
     owner: root
     group: root
     mode: 644
+  when: logstash_web_installed.stat.exists == true

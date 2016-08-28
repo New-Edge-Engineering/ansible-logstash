@@ -12,3 +12,5 @@ logstash_web: true
 logstash_ssl_dir: /etc/pki/logstash
 logstash_ssl_certificate_file: logstash-forwarder-example.crt
 logstash_ssl_key_file: logstash-forwarder-example.key
+
+logstash_plugins: []

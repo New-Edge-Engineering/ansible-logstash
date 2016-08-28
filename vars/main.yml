@@ -1,2 +1,2 @@
 ---
-logstash_version: 1.5  # Can be either 1.4 or 1.5
+logstash_version: 2.3

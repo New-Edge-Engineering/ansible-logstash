@@ -1,4 +1,11 @@
 output {
+{% if 'logstash-output-amazon_es' in logstash_plugins %}
+  amazon_es {
+    host => "__HOST__"
+    region => "__REGION__"
+    index => "logstash-%{+YYYY.MM.dd}"
+  }
+{% else %}
   elasticsearch {
     cluster => "logstash"
     host => "{{ logstash_elasticsearch_host }}"
@@ -6,4 +13,5 @@ output {
     protocol => "http"
     port => 80
   }
+{% endif %}
 }

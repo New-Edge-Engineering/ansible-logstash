@@ -2,11 +2,15 @@
 - include: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
 
-- include: setup-1.4-Debian.yml
-  when: ansible_os_family == 'Debian' and logstash_version | version_compare('1.4', operator='eq', strict=True)
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
 
-- include: setup-1.5-Debian.yml
-  when: ansible_os_family == 'Debian' and logstash_version | version_compare('1.5', operator='eq', strict=True)
+- name: Ensure plugins are installed
+  command: "bin/plugin install {{ item }}"
+  args:
+    chdir: /opt/logstash
+  with_items: logstash_plugins
+  notify: restart logstash
 
 - name: Create Logstash input configuration files.
   copy:
