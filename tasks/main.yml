@@ -9,7 +9,7 @@
   command: "bin/plugin install {{ item }}"
   args:
     chdir: /opt/logstash
-  with_items: logstash_plugins
+  with_items: "{{logstash_plugins}}"
   notify: restart logstash
 
 - name: Create Logstash input configuration files.
